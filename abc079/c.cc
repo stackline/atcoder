@@ -1,6 +1,12 @@
 #include <bits/stdc++.h>
-#include <sstream>
 using namespace std;
+
+int ctoi(char c) {
+  if (c >= '0' && c <= '9') {
+    return c - '0';
+  }
+  return 0;
+}
 
 string calc(string &s, string formula, int sum, int i) {
   // ベースケース
@@ -12,10 +18,7 @@ string calc(string &s, string formula, int sum, int i) {
     }
   }
   // 再帰ステップ
-  stringstream ss;
-  int num;
-  ss << s[i];
-  ss >> num;
+  int num = ctoi(s[i]);
 
   string calculated;
   // 加算
@@ -34,11 +37,7 @@ int main() {
 
   string formula;
   formula.push_back(s[0]);
-
-  stringstream ss;
-  int sum;
-  ss << s[0];
-  ss >> sum;
+  int sum = ctoi(s[0]);
 
   formula = calc(s, formula, sum, 1);
 
