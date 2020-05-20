@@ -11,8 +11,7 @@ int main() {
   // グラフ入力受取（ここでは無向グラフを想定）
   Graph G(N);
   for (int i = 0; i < M; i++) {
-    int a;
-    int b;
+    int a, b;
     cin >> a >> b;
     G.at(a).push_back(b);
     G.at(b).push_back(a);
