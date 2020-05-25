@@ -10,13 +10,6 @@ int dfs(vector<vector<bool>> &relationships, int v, vector<int> combination) {
     // 派閥を構成できるかどうか確認する
     int size = (int) combination.size();
 
-    // cout << "[";
-    // for(auto i : combination) {
-    //   cout << i;
-    // }
-    // cout << "]" << endl;
-    // cout << "size : " << size << endl;
-
     // 0人の組合せ、考慮不要
     // 1人の組合せ、派閥の構成人数は1人となる
     if (size == 0 || size == 1) {
@@ -28,7 +21,6 @@ int dfs(vector<vector<bool>> &relationships, int v, vector<int> combination) {
       for (int j = i + 1; j < size; j++) {
         int y = combination.at(j);
         if (relationships[x][y] == false) {
-          // cout << "(x, y) = (" << i << ", " << j << ")" << endl;
           return 0;
         }
       }
