@@ -1,11 +1,10 @@
 #include <bits/stdc++.h>
 using namespace std;
-using Graph = vector<vector<int>>;
 
 // 頂点数と辺数
 int N, M;
 
-int dfs(Graph &G, vector<vector<bool>> &relationships, int v, vector<int> combination) {
+int dfs(vector<vector<bool>> &relationships, int v, vector<int> combination) {
   // ベースケース
   if (v == N) {
     // 派閥を構成できるかどうか確認する
@@ -39,10 +38,10 @@ int dfs(Graph &G, vector<vector<bool>> &relationships, int v, vector<int> combin
 
   // 再帰ステップ
   // 対象メンバーを含めない場合
-  int a = dfs(G, relationships, v + 1, combination);
+  int a = dfs(relationships, v + 1, combination);
   // 対象メンバーを含める場合
   combination.push_back(v);
-  int b = dfs(G, relationships, v + 1, combination);
+  int b = dfs(relationships, v + 1, combination);
 
   return max(a, b);
 }
@@ -50,24 +49,19 @@ int dfs(Graph &G, vector<vector<bool>> &relationships, int v, vector<int> combin
 int main() {
   cin >> N >> M;
 
-  // グラフ入力受取
-  // 合わせて、人間関係を初期化する
-  Graph G(N);
+  // 人間関係を初期化する
   vector<vector<bool>> relationships(N, vector<bool>(N, false));
   for (int i = 0; i < M; i++) {
     int x, y;
     cin >> x >> y;
     x--; y--; // 0-indexed
-    // 無向グラフ
-    G.at(x).push_back(y);
-    G.at(y).push_back(x);
     // 人間関係が存在する場合 true をセット
     relationships[x][y] = true;
     relationships[y][x] = true;
   }
 
   vector<int> combination;
-  int ans = dfs(G, relationships, 0, combination);
+  int ans = dfs(relationships, 0, combination);
   cout << ans << endl;
   return 0;
 }
