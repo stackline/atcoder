@@ -1,5 +1,6 @@
 #include <bits/stdc++.h>
 using namespace std;
+using ll = long long;
 using Graph = vector<vector<int>>;
 
 // 深さ優先探索
