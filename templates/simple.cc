@@ -19,5 +19,11 @@ int ctoi(char c) {
 int main() {
   int a, b;
   cin >> a >> b;
+
+  // Bit traverse
+  for (int tmp = 0; tmp < (1 << 3); tmp++) {
+    bitset<3> s(tmp);
+    cout << s << endl;
+  }
   return 0;
 }
