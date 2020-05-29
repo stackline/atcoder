@@ -1,4 +1,5 @@
 #include <bits/stdc++.h>
+#include <iomanip> // for lint (use of undeclared identifier 'setprecision')
 using namespace std;
 using ll = long long;
 
