@@ -10,52 +10,34 @@ int main() {
   int b = 0;
   int ab = 0;
 
-  // ABピザを2枚購入する方が、Aピザ・Bピザを1枚ずつ購入するより安い場合
+  // 必要なピザの枚数を比較して、A・Bの両方で最低限必要な枚数を算出
+  int n = min(X, Y);
+
+  // ABを2枚購入する方が、A・Bを1枚ずつ購入するより安い場合
   if ((C * 2) < (A + B)) {
-    // 買える分だけABピザを買う
-    int n = min(X, Y);
     ab = n * 2;
-
-    int x_rest = X - n;
-    int y_rest = Y - n;
-
-    // Aピザ1枚 or ABピザ2枚の安い方で購入する
-    if ((C * 2) < A) {
-      ab += x_rest * 2;
-    } else {
-      a += x_rest;
-    }
-
-    // Bピザ1枚 or ABピザ2枚の安い方で購入する
-    if ((C * 2) < B) {
-      ab += y_rest * 2;
-    } else {
-      b += y_rest;
-    }
-  // ABピザを2枚購入した方が高い場合
-  // Aピザ・Bピザを1枚ずつ購入する
+  // ABを2枚購入する方が、A・Bを1枚ずつ購入するより高い場合
   } else {
-    // 買える分だけAピザ・Bピザを買う
-    int n = min(X, Y);
-    a += n;
-    b += n;
+    a = n;
+    b = n;
+  }
 
-    int x_rest = X - n;
-    int y_rest = Y - n;
+  // 残りの必要なピザの枚数
+  int x_rest = X - n;
+  int y_rest = Y - n;
 
-    // Aピザ1枚 or ABピザ2枚の安い方で購入する
-    if ((C * 2) < A) {
-      ab += x_rest * 2;
-    } else {
-      a += x_rest;
-    }
+  // 残りのAピザを、Aピザ1枚 or ABピザ2枚の安い方で補填する
+  if ((C * 2) < A) {
+    ab += x_rest * 2;
+  } else {
+    a += x_rest;
+  }
 
-    // Bピザ1枚 or ABピザ2枚の安い方で購入する
-    if ((C * 2) < B) {
-      ab += y_rest * 2;
-    } else {
-      b += y_rest;
-    }
+  // 残りのBピザを、Bピザ1枚 or ABピザ2枚の安い方で補填する
+  if ((C * 2) < B) {
+    ab += y_rest * 2;
+  } else {
+    b += y_rest;
   }
 
   cout << (A * a + B * b + C * ab) << endl;
