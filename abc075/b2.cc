@@ -5,20 +5,13 @@ using ll = long long;
 int h, w;
 
 int bomb_count(vector<vector<char>> &v, int x, int y) {
-  vector<pair<int, int>> points;
-  points.push_back(make_pair(x - 1, y - 1));
-  points.push_back(make_pair(x,     y - 1));
-  points.push_back(make_pair(x + 1, y - 1));
-  points.push_back(make_pair(x + 1, y));
-  points.push_back(make_pair(x + 1, y + 1));
-  points.push_back(make_pair(x,     y + 1));
-  points.push_back(make_pair(x - 1, y + 1));
-  points.push_back(make_pair(x - 1, y));
+  vector<int> dx{ x - 1, x,     x + 1, x + 1, x + 1, x    , x - 1, x - 1 };
+  vector<int> dy{ y - 1, y - 1, y - 1, y,     y + 1, y + 1, y + 1, y };
 
   int num = 0;
-  for (auto point : points) {
-    int xx = point.first;
-    int yy = point.second;
+  for (int i = 0; i < 8; i++) {
+    int xx = dx.at(i);
+    int yy = dy.at(i);
     if (xx >= 0 && xx < h && yy >= 0 && yy < w) {
       if (v.at(xx).at(yy) == '#') {
         num++;
