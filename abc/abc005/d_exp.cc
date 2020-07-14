@@ -2,6 +2,10 @@
 using namespace std;
 using ll = long long;
 
+// O(N + N + N^4 + Q)
+// Q の最大値は N^2
+// そのため、計算量は O(N^4)
+// N <= 50 のため、50^4 = 6_250_000 ぐらい
 int main() {
   // たこ焼き機の縦・横の長さ
   int N;
