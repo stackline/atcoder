@@ -63,7 +63,6 @@ int main() {
   cin >> Q;
 
   // 店員ごとの、一度に焼けるたこ焼きの上限
-  vector<int> P(Q);
   for (int i = 0; i < Q; i++) {
     int num;
     cin >> num;
