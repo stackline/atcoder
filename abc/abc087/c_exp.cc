@@ -2,6 +2,9 @@
 using namespace std;
 using ll = long long;
 
+// O(2 * n + n * n)
+// O(n^2 + 2n)
+// O(n^2)
 int main() {
   int n;
   cin >> n;
