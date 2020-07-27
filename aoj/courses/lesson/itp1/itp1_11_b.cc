@@ -3,7 +3,7 @@ using namespace std;
 using ll = long long;
 
 struct Dice {
-  int top, bottom, front, back, left, right;
+  int top, front, right, left, back, bottom;
   // constructor
   //
   //         top:1
@@ -29,15 +29,15 @@ struct Dice {
       bottom = right;
       right  = old_top;
     } else if (c == 'N') {
-      top    = back;
-      back   = bottom;
-      bottom = front;
-      front  = old_top;
-    } else if (c == 'S') {
       top    = front;
       front  = bottom;
       bottom = back;
       back   = old_top;
+    } else if (c == 'S') {
+      top    = back;
+      back   = bottom;
+      bottom = front;
+      front  = old_top;
     } else if (c == 'W') {
       top    = right;
       right  = bottom;
@@ -66,13 +66,13 @@ int main() {
     // 上面を質問の整数（上面）にする
     // NOTE: dice.top == q_top の場合は操作不要のため何もしない
     if (dice.back == q_top) {
-      dice.roll('N');
+      dice.roll('S');
     } else if (dice.right == q_top) {
       dice.roll('W');
     } else if (dice.left == q_top) {
-      dice.roll('N');
+      dice.roll('E');
     } else if (dice.front == q_top) {
-      dice.roll('S');
+      dice.roll('N');
     } else if (dice.bottom == q_top) {
       dice.roll('N');
       dice.roll('N');
