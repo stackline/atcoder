@@ -3,7 +3,7 @@ using namespace std;
 using ll = long long;
 
 struct Dice {
-  int top, bottom, front, back, left, right;
+  int top, front, right, left, back, bottom;
   // constructor
   //
   //         top:1
@@ -29,15 +29,15 @@ struct Dice {
       bottom = right;
       right  = old_top;
     } else if (c == 'N') {
-      top    = back;
-      back   = bottom;
-      bottom = front;
-      front  = old_top;
-    } else if (c == 'S') {
       top    = front;
       front  = bottom;
       bottom = back;
       back   = old_top;
+    } else if (c == 'S') {
+      top    = back;
+      back   = bottom;
+      bottom = front;
+      front  = old_top;
     } else if (c == 'W') {
       top    = right;
       right  = bottom;
