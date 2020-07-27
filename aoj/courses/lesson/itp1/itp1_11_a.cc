@@ -3,19 +3,21 @@ using namespace std;
 using ll = long long;
 
 struct Dice {
-  int top;
-  int bottom;
-  int up;
-  int down;
-  int left;
-  int right;
+  int top, front, right, left, back, bottom;
   // constructor
+  //
+  //         top:1
+  //           |
+  // left:4--front:2--right:3--back:5
+  //           |
+  //         bottom:6
+  //
   Dice(vector<int> v) {
     top    = v.at(0);
-    down   = v.at(1);
+    front  = v.at(1);
     right  = v.at(2);
     left   = v.at(3);
-    up     = v.at(4);
+    back   = v.at(4);
     bottom = v.at(5);
   }
 
@@ -27,15 +29,15 @@ struct Dice {
       bottom = right;
       right  = old_top;
     } else if (c == 'N') {
-      top    = down;
-      down   = bottom;
-      bottom = up;
-      up     = old_top;
+      top    = front;
+      front  = bottom;
+      bottom = back;
+      back   = old_top;
     } else if (c == 'S') {
-      top    = up;
-      up     = bottom;
-      bottom = down;
-      down   = old_top;
+      top    = back;
+      back   = bottom;
+      bottom = front;
+      front  = old_top;
     } else if (c == 'W') {
       top    = right;
       right  = bottom;
