@@ -42,7 +42,6 @@ vector<int> bubble_sort(vector<int> &A, int N, int &num_of_exchanges) {
   //
   bool existing = true;
   int i = 0; // 未ソートの部分の先頭を指すループ変数
-  int loop_counter = 0;
   while (existing) {
     existing = false;
     for (int j = N-1; j >= i+1; j--) {
@@ -51,7 +50,6 @@ vector<int> bubble_sort(vector<int> &A, int N, int &num_of_exchanges) {
         num_of_exchanges++;
         existing = true;
       }
-      loop_counter++;
     }
     i++;
   }
