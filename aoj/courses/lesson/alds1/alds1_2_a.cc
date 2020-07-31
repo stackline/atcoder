@@ -47,11 +47,7 @@ vector<int> bubble_sort(vector<int> &A, int N, int &num_of_exchanges) {
     existing = false;
     for (int j = N-1; j >= i+1; j--) {
       if (A.at(j) < A.at(j-1)) {
-        int tmp1 = A.at(j);
-        int tmp2 = A.at(j-1);
-        A.at(j) = tmp2;
-        A.at(j-1) = tmp1;
-
+        swap(A.at(j), A.at(j-1));
         num_of_exchanges++;
         existing = true;
       }
