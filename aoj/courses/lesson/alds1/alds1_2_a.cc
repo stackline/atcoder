@@ -2,6 +2,12 @@
 using namespace std;
 using ll = long long;
 
+// 計算量
+//   N-1 * N-2 * ... * 2 * 1
+// = (N-1 + 1) * (N-1 / 2)
+// = (N) * (N-1 / 2)
+// = (N**2 - N) / 2
+// = O(N**2)
 vector<int> bubble_sort(vector<int> &A, int N, int &num_of_exchanges) {
   // # while ループ1回目
   // * 5 3 2 4 1
