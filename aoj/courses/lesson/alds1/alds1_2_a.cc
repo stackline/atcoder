@@ -8,7 +8,7 @@ using ll = long long;
 // = (N) * (N-1 / 2)
 // = (N**2 - N) / 2
 // = O(N**2)
-vector<int> bubble_sort(vector<int> &A, int N, int &num_of_exchanges) {
+void bubble_sort(vector<int> &A, int N, int &num_of_exchanges) {
   // # while ループ1回目
   // * 5 3 2 4 1
   //   * 1 < 4 のため、4 1 をひっくり返す
@@ -53,8 +53,6 @@ vector<int> bubble_sort(vector<int> &A, int N, int &num_of_exchanges) {
     }
     i++;
   }
-
-  return A;
 }
 
 int main() {
