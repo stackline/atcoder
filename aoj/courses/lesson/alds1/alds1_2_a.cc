@@ -8,6 +8,21 @@ using ll = long long;
 // = (N) * (N-1 / 2)
 // = (N**2 - N) / 2
 // = O(N**2)
+
+// MEMO:
+// 螺旋本の回答例では、関数が引数として配列を受け取る。
+// 配列は std::vector や std::array ではなく、int a[] で表す配列である。
+// 以下の2つのシグネチャは、配列の先頭要素へのポインタ値が渡されている。
+// そのため、関数内で配列の要素の値を変更すると、呼び出し元の変数から参照する値も変更となる。
+//
+//   // 関数
+//   // void func(int *A) {} と同じ
+//   void func(int A[]) {}
+//
+//   // 呼び出し元
+//   int A[100]
+//   func(A);
+//
 void bubble_sort(vector<int> &A, int N, int &num_of_exchanges) {
   // # while ループ1回目
   // * 5 3 2 4 1
