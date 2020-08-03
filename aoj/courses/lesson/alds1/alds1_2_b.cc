@@ -2,6 +2,7 @@
 using namespace std;
 using ll = long long;
 
+// 計算量 O(N**2)
 int selection_sort(vector<int> &A, int N) {
   int counter = 0;
   // i=0 の時
