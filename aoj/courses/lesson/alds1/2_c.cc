@@ -40,6 +40,24 @@ void print_vector(vector<string> C, int N) {
   cout << endl;
 }
 
+// p.71 掲載の、ソート結果が安定かどうかを調べる O(N**4) のアルゴリズム
+//
+// * 引数 in  は安定ソートなアルゴリズムでソートした配列
+// * 引数 out は安定しているかどうかを判定したい配列
+// * in out ともに、ある1つの配列にアルゴリズムを用いてソートしたもの
+// * データ例
+//   * ソート前
+//     * H4 C9 S4 D2 C3
+//   * ソート後
+//     * in  = 安定なソート結果   : D2 C3 H4 S4 C9
+//     * out = 非安定なソート結果 : D2 C3 S4 H4 C9
+// * 以下を全て満たす場合 is_stable = false と判定する
+//   * in[i].value == in[j].value         // 安定ソートで2枚のカードの数字が等しい
+//   * in[i] == out[b] && in[j] == out[a] // inの配列とoutの配列で要素の位置が逆転している
+// * データ例に当てはめると
+//   * in[2].value == in[3].value && in[2] == out[3] && in[3] == out[2] が true となる
+//   * in では要素番号で 2->3 と並んでいた要素が、out では要素番号で 3->2 と並び、安定していない
+//
 void print_stable_condition(vector<string> origin, vector<string> sorted, int N) {
   bool stable = true;
   for (int i = 0; i < N-1; i++) {
