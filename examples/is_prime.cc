@@ -7,7 +7,7 @@ bool is_prime(int n) {
   if (n == 2) { return true; } // 2 は素数である
   if (n % 2 == 0) { return false; } // 2以外の偶数は素数ではない
 
-  for (int i = 3; i <= sqrt(n); i = i + 2) {
+  for (int i = 3; i*i <= n; i = i + 2) {
     if (n % i == 0) {
       return false;
     }
