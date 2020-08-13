@@ -19,9 +19,10 @@ int main() {
   for (int i = 0; i < (int)s.size(); i++) {
     char c = s.at(i);
 
-    if (is_acgt(c)) { cnt++; }
-    if (!is_acgt(c) || i == (int)s.size()-1) {
+    if (is_acgt(c)) {
+      cnt++;
       ans = max(ans, cnt);
+    } else {
       cnt = 0;
     }
   }
