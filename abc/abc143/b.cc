@@ -2,6 +2,7 @@
 using namespace std;
 using ll = long long;
 
+// 計算量 : O(n**2)
 int main() {
   int n;
   cin >> n;
