@@ -2,6 +2,7 @@
 using namespace std;
 using ll = long long;
 
+// 計算量 : O(1) 定数時間
 int main() {
   int a, b, c, x, y;
   cin >> a >> b >> c >> x >> y;
