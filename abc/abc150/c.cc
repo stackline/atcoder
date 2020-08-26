@@ -11,6 +11,11 @@ bool compare(vector<int> a, vector<int> b, int n) {
   return true;
 }
 
+// 計算量 : O(n! * n)
+//
+// irb> (1..8).to_a.permutation.count
+// => 40320
+//
 int main() {
   int n;
   cin >> n;
