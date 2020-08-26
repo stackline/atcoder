@@ -21,20 +21,17 @@ int main() {
   }
 
   // 順列全探索
-  double sum = 0;
+  double sum = 0.0;
   int pattern = 0;
   do {
     for (int i = 1; i < n; i++) {
-      pair<int, int> current = v.at(order.at(i-1));
-      pair<int, int> next = v.at(order.at(i));
+      pair<int, int> from = v.at(order.at(i-1));
+      pair<int, int> to = v.at(order.at(i));
 
-      int x1 = current.first;
-      int y1 = current.second;
-      int x2 = next.first;
-      int y2 = next.second;
-
-      int dist = (x2-x1) * (x2-x1) + (y2-y1) * (y2-y1);
-      sum += sqrt(double(dist));
+      double dx = to.first - from.first;
+      double dy = to.second - from.second;
+      double dist = sqrt(dx*dx + dy*dy);
+      sum += dist;
     }
     pattern++;
   } while (next_permutation(order.begin(), order.end()));
