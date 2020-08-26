@@ -2,6 +2,7 @@
 using namespace std;
 using ll = long long;
 
+// 計算量 : O(nPn * n) = O(n! * n)
 int main() {
   int n;
   cin >> n;
