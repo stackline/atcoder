@@ -2,6 +2,8 @@
 using namespace std;
 using ll = long long;
 
+// ### 計算量
+// O(m + (n-1)! * n) --> O(m+n!) --> O(n!)
 bool all_seen(vector<bool> seen) {
   auto f = [](bool v_seen) { return v_seen == true; };
   return all_of(seen.begin(), seen.end(), f);

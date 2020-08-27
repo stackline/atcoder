@@ -1,6 +1,8 @@
 #include <bits/stdc++.h>
 using namespace std;
 
+// ### 計算量
+// O(m + n + n! * (n-1)) --> O(n!)
 int main() {
   int N; // <= 8
   int M; // <= 8 * (8 - 1) / 2 = 28
