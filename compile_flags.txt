@@ -1,2 +1,5 @@
 // Include the file "/usr/local/include/bits/stdc++.h"
 -I/usr/local/include
+-std=c++17
+-stdlib=libc++
+-Wall
