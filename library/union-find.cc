@@ -80,7 +80,7 @@ int main() {
   // for (int i = 0; i < m; i++) {
   //   int x, y;
   //   cin >> x >> y;
-  //   x--; y--;
+  //   x--; y--; // 0-indexed
   //   a.at(i) = make_pair(x, y);
   // }
   a.at(0) = make_pair(0, 1);
