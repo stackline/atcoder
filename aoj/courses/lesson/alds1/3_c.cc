@@ -66,6 +66,14 @@ public:
     x->prev = nil;
     nil->next = x;
   }
+
+  Node* listSearch(int key) {
+    Node *cur = nil->next;
+    while (cur != nil && cur->key != key) {
+      cur = cur->next;
+    }
+    return cur;
+  }
 };
 
 int main() {
@@ -114,6 +122,14 @@ int main() {
   cout << "nil->next->next-prev: " << dll.nil->next->next->prev << endl;
   cout << "nil->next->next-key:  " << dll.nil->next->next->key  << endl;
   cout << "nil->next->next-next: " << dll.nil->next->next->next << endl;
+
+  dll.insert(30);
+  cout << endl;
+  cout << "dll.insert(30);" << endl;
+  cout << "dll.listSearch(30): " << dll.listSearch(30) << endl;
+  cout << "dll.listSearch(20): " << dll.listSearch(20) << endl;
+  cout << "dll.listSearch(10): " << dll.listSearch(10) << endl;
+  cout << "dll.listSearch(0):  " << dll.listSearch(0) << endl;
 #endif
 
   return 0;
