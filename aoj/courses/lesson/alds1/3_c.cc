@@ -8,8 +8,7 @@ struct Node {
 };
 
 class DoublyLinkedList {
-// private:
-public:
+private:
   Node *nil;
 
 public:
@@ -51,16 +50,6 @@ public:
   void insert(int key) {
     Node *x = (Node *)malloc(sizeof(Node));
     x->key = key;
-
-    // 番兵 (nil ノード) の直後、既存の先頭ノードの前に要素を追加する
-    //
-    // nil - y に x を追加して nil - x - y とする場合
-    //
-    // * nil->next である y を x->next にセットする
-    // * nil->next である y の prev を x にする
-    //   * これで x->next = y, y->prev = x となり、双方向に連結する
-    // * nil->next = x, x->prev = nil として、nil と x を双方向に連結する
-    //
     x->next = nil->next;
     nil->next->prev = x;
     x->prev = nil;
@@ -94,71 +83,45 @@ public:
     }
     return cur;
   }
+
+  Node* selectNil() {
+    return nil;
+  }
 };
 
 int main() {
-#ifndef ONLINE_JUDGE
   int n;
   cin >> n;
 
-  vector<pair<string, int>> v(n);
-  for (int i = 0; i < n; i++) {
-    string s;
-    cin >> s;
-    int x;
-    if (s == "insert" || s == "delete") {
-      cin >> x;
-    } else {
-      x = -1;
-    }
-    v.at(i) = make_pair(s, x);
-  }
-#endif
-
-#ifdef ONLINE_JUDGE
   DoublyLinkedList dll;
-  cout << "# DoublyLinkedList dll;" << endl;
-  cout << "nil->prev: " << dll.nil->prev << endl;
-  cout << "nil->key:  " << dll.nil->key  << endl;
-  cout << "nil->next: " << dll.nil->next << endl;
-  dll.insert(10);
-  cout << endl;
-  cout << "dll.insert(10);" << endl;
-  cout << "nil->prev:       " << dll.nil->prev << endl;
-  cout << "nil->key:        " << dll.nil->key  << endl;
-  cout << "nil->next:       " << dll.nil->next << endl;
-  cout << "nil->next->prev: " << dll.nil->next->prev << endl;
-  cout << "nil->next->key:  " << dll.nil->next->key  << endl;
-  cout << "nil->next->next: " << dll.nil->next->next << endl;
-  dll.insert(20);
-  cout << endl;
-  cout << "dll.insert(20);" << endl;
-  cout << "nil->prev:            " << dll.nil->prev << endl;
-  cout << "nil->key:             " << dll.nil->key  << endl;
-  cout << "nil->next:            " << dll.nil->next << endl;
-  cout << "nil->next->prev:      " << dll.nil->next->prev << endl;
-  cout << "nil->next->key:       " << dll.nil->next->key  << endl;
-  cout << "nil->next->next:      " << dll.nil->next->next << endl;
-  cout << "nil->next->next-prev: " << dll.nil->next->next->prev << endl;
-  cout << "nil->next->next-key:  " << dll.nil->next->next->key  << endl;
-  cout << "nil->next->next-next: " << dll.nil->next->next->next << endl;
+  for (int i = 0; i < n; i++) {
+    char c[12];
+    int x;
+    // c は配列であり、アドレスを表す
+    // x は整数型変数であり、& (アドレス演算子) でアドレスを表す
+    scanf("%s %d", c, &x);
+    string s = c;
+    if (s == "insert") {
+      dll.insert(x);
+    } else if (s == "delete") {
+      dll.deleteKey(x);
+    } else if (s == "deleteFirst") {
+      dll.deleteFirst();
+    } else if (s == "deleteLast") {
+      dll.deleteLast();
+    }
+  }
 
-  dll.insert(30);
+  Node *nil = dll.selectNil();
+  Node *cur = nil->next;
+  bool is_first = true;
+  while (1) {
+    if (cur == nil) { break; }
+    if (is_first == false) { cout << " "; }
+    cout << cur->key;
+    cur = cur->next;
+    is_first = false;
+  }
   cout << endl;
-  cout << "dll.insert(30);" << endl;
-  cout << "dll.listSearch(30): " << dll.listSearch(30) << endl;
-  cout << "dll.listSearch(20): " << dll.listSearch(20) << endl;
-  cout << "dll.listSearch(10): " << dll.listSearch(10) << endl;
-  cout << "dll.listSearch(0):  " << dll.listSearch(0) << endl;
-
-  dll.deleteKey(20);
-  cout << endl;
-  cout << "dll.deleteKey(20);" << endl;
-  cout << "dll.listSearch(30): " << dll.listSearch(30) << endl;
-  cout << "dll.listSearch(20): " << dll.listSearch(20) << endl;
-  cout << "dll.listSearch(10): " << dll.listSearch(10) << endl;
-  cout << "dll.listSearch(0):  " << dll.listSearch(0) << endl;
-#endif
-
   return 0;
 }
