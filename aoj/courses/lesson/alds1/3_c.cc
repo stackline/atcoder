@@ -67,6 +67,26 @@ public:
     nil->next = x;
   }
 
+  void deleteNode(Node *t) {
+    if (t == nil) { return; }
+    t->prev->next = t->next;
+    t->next->prev = t->prev;
+    free(t);
+  }
+
+  void deleteFirst() {
+    deleteNode(nil->next);
+  }
+
+  void deleteLast() {
+    deleteNode(nil->prev);
+  }
+
+  void deleteKey(int key) {
+    Node *t = listSearch(key);
+    deleteNode(t);
+  }
+
   Node* listSearch(int key) {
     Node *cur = nil->next;
     while (cur != nil && cur->key != key) {
@@ -126,6 +146,14 @@ int main() {
   dll.insert(30);
   cout << endl;
   cout << "dll.insert(30);" << endl;
+  cout << "dll.listSearch(30): " << dll.listSearch(30) << endl;
+  cout << "dll.listSearch(20): " << dll.listSearch(20) << endl;
+  cout << "dll.listSearch(10): " << dll.listSearch(10) << endl;
+  cout << "dll.listSearch(0):  " << dll.listSearch(0) << endl;
+
+  dll.deleteKey(20);
+  cout << endl;
+  cout << "dll.deleteKey(20);" << endl;
   cout << "dll.listSearch(30): " << dll.listSearch(30) << endl;
   cout << "dll.listSearch(20): " << dll.listSearch(20) << endl;
   cout << "dll.listSearch(10): " << dll.listSearch(10) << endl;
