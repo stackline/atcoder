@@ -18,17 +18,53 @@ int fibonacci(int n) {
   return fibonacci(n-1) + fibonacci(n-2);
 }
 
+// メモ探索
+int memoized_counter = 0;
+int memoized_fibonacci(vector<bool> &done, vector<int> &memo, int n) {
+  memoized_counter++;
+
+  if (done.at(n)) {
+    return memo.at(n);
+  }
+
+  int num;
+  if (n == 0) {
+    num = 0;
+  } else if (n == 1) {
+    num = 1;
+  } else {
+    num = memoized_fibonacci(done, memo, n-1) + memoized_fibonacci(done, memo, n-2);
+  }
+
+  done.at(n) = true;
+  memo.at(n) = num;
+
+  return num;
+}
+
 int main() {
   cin.tie(nullptr);               // Do not flush "cout" when processing "cin".
   // ios::sync_with_stdio(false); // Be careful when using both "cin/cout" and "scanf/printf".
 
+  int n = 10;
+
   // 全探索
-  for (int i = 0; i < 10; i++) {
+  for (int i = 0; i < n; i++) {
     if (i > 0) { cout << ", "; }
     cout << fibonacci(i);
   }
-  cout << "\n";
-  cout << "counter: " << counter << "\n";
+  cout << endl;
+  cout << "counter: " << counter << endl;
+
+  // メモ探索
+  vector<bool> done(n, false);
+  vector<int> memo(n);
+  for (int i = 0; i < n; i++) {
+    if (i > 0) { cout << ", "; }
+    cout << memoized_fibonacci(done, memo, i);
+  }
+  cout << endl;
+  cout << "memoized_counter: " << memoized_counter << endl;
 
   return 0;
 }
