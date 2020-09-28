@@ -99,7 +99,7 @@ int main() {
   cin.tie(nullptr);               // Do not flush "cout" when processing "cin".
   // ios::sync_with_stdio(false); // Be careful when using both "cin/cout" and "scanf/printf".
 
-  int n = 30;
+  int n = 42;
   StopWatch sw;
 
   // 全探索
@@ -112,7 +112,7 @@ int main() {
   sw.stop();
   cout << endl;
   cout << "counter: " << counter << endl;
-  cout << "elapsed: " << sw.elapsed_high_precision_ms() << " ミリ秒" << endl;
+  printf("elapsed: %.3f ミリ秒\n", sw.elapsed_high_precision_ms());
 
   // メモ探索
   cout << "# memoized search" << endl;
@@ -126,7 +126,7 @@ int main() {
   sw.stop();
   cout << endl;
   cout << "counter: " << memoized_counter << endl;
-  cout << "elapsed: " << sw.elapsed_high_precision_ms() << " ミリ秒" << endl;
+  printf("elapsed: %.3f ミリ秒\n", sw.elapsed_high_precision_ms());
 
   // 動的計画法
   cout << "# dp" << endl;
@@ -139,7 +139,7 @@ int main() {
   }
   sw.stop();
   cout << endl;
-  cout << "elapsed: " << sw.elapsed_high_precision_ms() << " ミリ秒" << endl;
+  printf("elapsed: %.3f ミリ秒\n", sw.elapsed_high_precision_ms());
 
   return 0;
 }
