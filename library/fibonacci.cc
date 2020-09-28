@@ -3,19 +3,46 @@ using namespace std;
 using ll = long long;
 
 struct StopWatch {
-  clock_t start_ct;
-  clock_t stop_ct;
+  chrono::system_clock::time_point start_pt;
+  chrono::system_clock::time_point end_pt;
 
   void start() {
-    start_ct = clock();
+    start_pt = chrono::system_clock::now();
   }
+
   void stop() {
-    stop_ct = clock();
+    end_pt = chrono::system_clock::now();
   }
-  double elapsed() {
-    double in_seconds = (double) (stop_ct - start_ct) / CLOCKS_PER_SEC;
-    double in_milliseocnds = in_seconds * 1000.0;
-    return in_milliseocnds;
+
+  // ナノ秒
+  long long elapsed_ns() {
+    chrono::system_clock::duration elapsed = end_pt - start_pt;
+    chrono::nanoseconds sec = chrono::duration_cast<chrono::nanoseconds>(elapsed);
+    return static_cast<long long>(sec.count());
+  }
+  // マイクロ秒
+  long long elapsed_us() {
+    chrono::system_clock::duration elapsed = end_pt - start_pt;
+    chrono::microseconds sec = chrono::duration_cast<chrono::microseconds>(elapsed);
+    return static_cast<long long>(sec.count());
+  }
+  // ミリ秒
+  long long elapsed_ms() {
+    chrono::system_clock::duration elapsed = end_pt - start_pt;
+    chrono::milliseconds sec = chrono::duration_cast<chrono::milliseconds>(elapsed);
+    return static_cast<long long>(sec.count());
+  }
+  // マイクロ秒から算出したミリ秒
+  double elapsed_high_precision_ms() {
+    chrono::system_clock::duration elapsed = end_pt - start_pt;
+    chrono::microseconds sec = chrono::duration_cast<chrono::microseconds>(elapsed);
+    return static_cast<double>(sec.count()) / 1000.0;
+  }
+  // 秒
+  long long elapsed_sec() {
+    chrono::system_clock::duration elapsed = end_pt - start_pt;
+    chrono::seconds sec = chrono::duration_cast<chrono::seconds>(elapsed);
+    return static_cast<long long>(sec.count());
   }
 };
 
@@ -72,7 +99,7 @@ int main() {
   cin.tie(nullptr);               // Do not flush "cout" when processing "cin".
   // ios::sync_with_stdio(false); // Be careful when using both "cin/cout" and "scanf/printf".
 
-  int n = 16;
+  int n = 30;
   StopWatch sw;
 
   // 全探索
@@ -85,7 +112,7 @@ int main() {
   sw.stop();
   cout << endl;
   cout << "counter: " << counter << endl;
-  printf("elapsed: %lf[ms]\n", sw.elapsed());
+  cout << "elapsed: " << sw.elapsed_high_precision_ms() << " ミリ秒" << endl;
 
   // メモ探索
   cout << "# memoized search" << endl;
@@ -99,7 +126,7 @@ int main() {
   sw.stop();
   cout << endl;
   cout << "counter: " << memoized_counter << endl;
-  printf("elapsed: %lf[ms]\n", sw.elapsed());
+  cout << "elapsed: " << sw.elapsed_high_precision_ms() << " ミリ秒" << endl;
 
   // 動的計画法
   cout << "# dp" << endl;
@@ -112,7 +139,7 @@ int main() {
   }
   sw.stop();
   cout << endl;
-  printf("elapsed: %lf[ms]\n", sw.elapsed());
+  cout << "elapsed: " << sw.elapsed_high_precision_ms() << " ミリ秒" << endl;
 
   return 0;
 }
