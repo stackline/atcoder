@@ -59,6 +59,15 @@ int memoized_fibonacci(vector<bool> &done, vector<int> &memo, int n) {
   return num;
 }
 
+// 動的計画法
+void dp_fibonacci(vector<int> &dp, int n) {
+  dp.at(0) = 0;
+  dp.at(1) = 1;
+  for (int i = 2; i <= n; i++) {
+    dp.at(i) = dp.at(i-1) + dp.at(i-2);
+  }
+}
+
 int main() {
   cin.tie(nullptr);               // Do not flush "cout" when processing "cin".
   // ios::sync_with_stdio(false); // Be careful when using both "cin/cout" and "scanf/printf".
@@ -90,6 +99,19 @@ int main() {
   sw.stop();
   cout << endl;
   cout << "counter: " << memoized_counter << endl;
+  printf("elapsed: %lf[ms]\n", sw.elapsed());
+
+  // 動的計画法
+  cout << "# dp" << endl;
+  vector<int> dp(n+1);
+  sw.start();
+  dp_fibonacci(dp, n);
+  for (int i = 0; i < n; i++) {
+    if (i > 0) { cout << ", "; }
+    cout << dp.at(i);
+  }
+  sw.stop();
+  cout << endl;
   printf("elapsed: %lf[ms]\n", sw.elapsed());
 
   return 0;
