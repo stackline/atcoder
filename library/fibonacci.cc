@@ -69,23 +69,14 @@ vector<int> memo;
 int memoized_fibonacci(vector<bool> &done, vector<int> &memo, int n) {
   memoized_counter++;
 
-  if (done.at(n)) {
-    return memo.at(n);
-  }
-
-  int num;
-  if (n == 0) {
-    num = 0;
-  } else if (n == 1) {
-    num = 1;
-  } else {
-    num = memoized_fibonacci(done, memo, n-1) + memoized_fibonacci(done, memo, n-2);
-  }
+  // n={0,1} は再帰関数を呼び出さないため、キャッシュする必要がない
+  if (n == 0) { return 0; }
+  if (n == 1) { return 1; }
+  if (done.at(n)) { return memo.at(n); }
 
   done.at(n) = true;
-  memo.at(n) = num;
-
-  return num;
+  memo.at(n) = memoized_fibonacci(done, memo, n-1) + memoized_fibonacci(done, memo, n-2);
+  return memo.at(n);
 }
 
 // 動的計画法
