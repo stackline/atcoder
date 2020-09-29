@@ -99,7 +99,7 @@ int main() {
   // 全探索
   cout << "# Full search" << endl;
   sw.start();
-  for (int i = 0; i < n; i++) {
+  for (int i = 0; i <= n; i++) {
     if (i > 0) { cout << ", "; }
     cout << fibonacci(i);
   }
@@ -110,10 +110,10 @@ int main() {
 
   // メモ探索
   cout << "# memoized search" << endl;
-  done.resize(n, false);
-  memo.resize(n);
+  done.resize(n+1, false);
+  memo.resize(n+1);
   sw.start();
-  for (int i = 0; i < n; i++) {
+  for (int i = 0; i <= n; i++) {
     if (i > 0) { cout << ", "; }
     cout << memoized_fibonacci(done, memo, i);
   }
@@ -124,10 +124,10 @@ int main() {
 
   // 動的計画法
   cout << "# dp" << endl;
-  dp.resize(n);
+  dp.resize(n+1);
   sw.start();
   dp_fibonacci(dp, n);
-  for (int i = 0; i < n; i++) {
+  for (int i = 0; i <= n; i++) {
     if (i > 0) { cout << ", "; }
     cout << dp.at(i);
   }
