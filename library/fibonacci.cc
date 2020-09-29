@@ -64,6 +64,8 @@ int fibonacci(int n) {
 
 // メモ探索
 int memoized_counter = 0;
+vector<bool> done;
+vector<int> memo;
 int memoized_fibonacci(vector<bool> &done, vector<int> &memo, int n) {
   memoized_counter++;
 
@@ -116,8 +118,8 @@ int main() {
 
   // メモ探索
   cout << "# memoized search" << endl;
-  vector<bool> done(n, false);
-  vector<int> memo(n);
+  done.resize(n, false);
+  memo.resize(n);
   sw.start();
   for (int i = 0; i < n; i++) {
     if (i > 0) { cout << ", "; }
