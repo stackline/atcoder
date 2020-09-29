@@ -112,7 +112,7 @@ int main() {
   sw.stop();
   cout << endl;
   cout << "counter: " << counter << endl;
-  printf("elapsed: %.3f ミリ秒\n", sw.elapsed_high_precision_ms());
+  printf("elapsed: %.3f ミリ秒\n\n", sw.elapsed_high_precision_ms());
 
   // メモ探索
   cout << "# memoized search" << endl;
@@ -126,7 +126,7 @@ int main() {
   sw.stop();
   cout << endl;
   cout << "counter: " << memoized_counter << endl;
-  printf("elapsed: %.3f ミリ秒\n", sw.elapsed_high_precision_ms());
+  printf("elapsed: %.3f ミリ秒\n\n", sw.elapsed_high_precision_ms());
 
   // 動的計画法
   cout << "# dp" << endl;
@@ -139,7 +139,7 @@ int main() {
   }
   sw.stop();
   cout << endl;
-  printf("elapsed: %.3f ミリ秒\n", sw.elapsed_high_precision_ms());
+  printf("elapsed: %.3f ミリ秒\n\n", sw.elapsed_high_precision_ms());
 
   return 0;
 }
