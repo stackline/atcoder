@@ -66,7 +66,7 @@ int fibonacci(int n) {
 int memoized_counter = 0;
 vector<bool> done;
 vector<int> memo;
-int memoized_fibonacci(vector<bool> &done, vector<int> &memo, int n) {
+int memoized_fibonacci(int n) {
   memoized_counter++;
 
   // n={0,1} は再帰関数を呼び出さないため、キャッシュする必要がない
@@ -75,13 +75,13 @@ int memoized_fibonacci(vector<bool> &done, vector<int> &memo, int n) {
   if (done.at(n)) { return memo.at(n); }
 
   done.at(n) = true;
-  memo.at(n) = memoized_fibonacci(done, memo, n-1) + memoized_fibonacci(done, memo, n-2);
+  memo.at(n) = memoized_fibonacci(n-1) + memoized_fibonacci(n-2);
   return memo.at(n);
 }
 
 // 動的計画法
 vector<int> dp;
-void dp_fibonacci(vector<int> &dp, int n) {
+void dp_fibonacci(int n) {
   dp.at(0) = 0;
   dp.at(1) = 1;
   for (int i = 2; i <= n; i++) {
@@ -115,7 +115,7 @@ int main() {
   sw.start();
   for (int i = 0; i <= n; i++) {
     if (i > 0) { cout << ", "; }
-    cout << memoized_fibonacci(done, memo, i);
+    cout << memoized_fibonacci(i);
   }
   sw.stop();
   cout << endl;
@@ -126,7 +126,7 @@ int main() {
   cout << "# dp" << endl;
   dp.resize(n+1);
   sw.start();
-  dp_fibonacci(dp, n);
+  dp_fibonacci(n);
   for (int i = 0; i <= n; i++) {
     if (i > 0) { cout << ", "; }
     cout << dp.at(i);
