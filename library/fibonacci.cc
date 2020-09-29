@@ -80,6 +80,7 @@ int memoized_fibonacci(vector<bool> &done, vector<int> &memo, int n) {
 }
 
 // 動的計画法
+vector<int> dp;
 void dp_fibonacci(vector<int> &dp, int n) {
   dp.at(0) = 0;
   dp.at(1) = 1;
@@ -123,7 +124,7 @@ int main() {
 
   // 動的計画法
   cout << "# dp" << endl;
-  vector<int> dp(n+1);
+  dp.resize(n);
   sw.start();
   dp_fibonacci(dp, n);
   for (int i = 0; i < n; i++) {
