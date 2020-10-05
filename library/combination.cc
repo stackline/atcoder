@@ -9,6 +9,7 @@ int combination(int n, int k) {
   }
   return num;
 }
+
 int main() {
   // 3C2
   int ans1 = combination(3, 2);
