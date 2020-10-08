@@ -2,14 +2,26 @@
 using namespace std;
 using ll = long long;
 
-ll search(int n) {
-  // ベースケース（マス1に到着）
-  if (n == 1) {
+// s: 区間の和集合
+// n: 最大のマス番号
+// current: 現在のマス番号
+ll full_search(set<int> &s, int &n, int current) {
+  // ベースケース（ゴールに到着）
+  if (current == n) {
     return 1;
   }
 
   // 再起ステップ
-  return n;
+  ll cnt = 0;
+  for (auto i : s) {
+    // nマス以内であれば、探索を進める。
+    // ゴールに到達した移動方法があれば、cnt を +1 する。
+    if ((current+i <= n)) {
+      cnt = cnt + full_search(s, n, current + i);
+    }
+  }
+
+  return cnt;
 }
 
 int main() {
@@ -25,23 +37,20 @@ int main() {
 
   // v: 区間[l, r]
   // s: 区間の和集合
-  // vector<pair<int, int>> v(k);
   set<int> s;
   for (int i = 0; i < k; i++) {
     int l, r;
     cin >> l >> r;
-    // v.at(i) = make_pair(l, r);
     for (int i = l; i <= r; i++) {
       s.insert(i);
     }
   }
 
-  // スタートから探索を開始すると探索の幅が広がるので、
-  // ゴールから戻る形で探索を開始する。
-  //
-  // 全探索で書いて、DPに持っていく
+  // 全探索
+  ll ans = full_search(s, n, 1);
 
-  ll ans = search(n);
+  // TODO: 全探索は TLE するので、メモ探索かDPに書き直す
+  // TODO: mod を取る
   cout << ans << endl;
 
 #ifndef ONLINE_JUDGE
