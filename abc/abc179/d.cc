@@ -79,6 +79,22 @@ ll memoize(vector<bool> &done, vector<int> &memo, set<int> &s, int &n, int curre
   return cnt;
 }
 
+// DP
+ll do_dp(int &n, set<int> &s) {
+  vector<ll> dp(n+1, 0);
+  dp.at(1) = 1;
+  for (int i = 1; i <= n; ++i) {
+    for (auto a : s) {
+      if (i+a <= n) {
+        dp.at(i+a) += dp.at(i);
+        dp.at(i+a) = dp.at(i+a) % MOD;
+      }
+    }
+  }
+
+  return dp.at(n);
+}
+
 int main() {
   cin.tie(nullptr);               // Do not flush "cout" when processing "cin".
   ios::sync_with_stdio(false); // Be careful when using both "cin/cout" and "scanf/printf".
@@ -105,9 +121,13 @@ int main() {
 
   // メモ探索
   // マス目を 1-indexed で取り扱っているので、要素数を n+1 している。
-  vector<bool> done(n+1, false);
-  vector<int> memo(n+1, 0);
-  ll ans = memoize(done, memo, s, n , 1);
+  // vector<bool> done(n+1, false);
+  // vector<int> memo(n+1, 0);
+  // ll ans = memoize(done, memo, s, n , 1);
+  // cout << ans << endl;
+
+  // DP
+  ll ans = do_dp(n, s);
   cout << ans << endl;
 
 #ifndef ONLINE_JUDGE
