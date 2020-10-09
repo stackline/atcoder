@@ -2,6 +2,10 @@
 using namespace std;
 using ll = long long;
 
+const int MOD = 998244353;
+
+// 全探索
+//
 // s: 区間の和集合
 // n: 最大のマス番号
 // current: 現在のマス番号
@@ -24,18 +28,67 @@ ll full_search(set<int> &s, int &n, int current) {
   return cnt;
 }
 
+// メモ探索
+//
+// ・入力例1〜4は処理できる。
+// ・提出すると TLE が発生する。
+// ・極端に大きな入力例を指定すると Segmentation fault が発生する。
+// 　・n=10000、s=[1, 200000] の場合、時間がかかるけど正常終了する。
+// 　・n=100000、s=[1, 200000] の場合、Segmentation fault が発生する。
+// ・以下のコマンドでデバッグを行い、current=70000 ぐらいでエラーしていることを確認した。
+// 　・ループしすぎなのかもしれない。
+//
+// ```
+// $ g++-9 -g -std=gnu++17 -Wall -Wextra -O2 -DONLINE_JUDGE -o a.out d.cc
+// $ lldb -f a.out
+// ```
+//
+ll memoize(vector<bool> &done, vector<int> &memo, set<int> &s, int &n, int current) {
+  // ベースケース（ゴールに到着）
+  if (current == n) {
+    return 1;
+  }
+
+  // 再起ステップ
+  // ---------- memoize begin ----------
+  if (done.at(current)) {
+    return memo.at(current);
+  }
+  // ---------- memoize end   ----------
+
+  ll cnt = 0;
+  for (int i : s) {
+    // nマス以内であれば、探索を進める。
+    // ゴールに到達した移動方法があれば、cnt を +1 する。
+    if ((current+i <= n)) {
+      cnt = cnt + memoize(done, memo, s, n, current + i);
+      cnt = cnt % MOD;
+    }
+  }
+
+  // ---------- memoize begin ----------
+  // 計算したことを記録する。
+  done.at(current) = true;
+  // 特定のマス current に到達した後、
+  // current からゴールに到着するパターン数 cnt を記録する。
+  // 次以降の探索では、current マスに到着した後の探索を行わず、
+  // メモ化した結果を使うことで、探索回数を減らす。
+  memo.at(current) = cnt;
+  // ---------- memoize end   ----------
+
+  return cnt;
+}
+
 int main() {
   cin.tie(nullptr);               // Do not flush "cout" when processing "cin".
   ios::sync_with_stdio(false); // Be careful when using both "cin/cout" and "scanf/printf".
-
-  // const int mod = 998244353;
 
   // n: マス目の数
   // k: 区間の数
   int n, k;
   cin >> n >> k;
 
-  // v: 区間[l, r]
+  // l, r: 区間[l, r]
   // s: 区間の和集合
   set<int> s;
   for (int i = 0; i < k; i++) {
@@ -47,10 +100,14 @@ int main() {
   }
 
   // 全探索
-  ll ans = full_search(s, n, 1);
+  // ll ans = full_search(s, n, 1);
+  // cout << ans << endl;
 
-  // TODO: 全探索は TLE するので、メモ探索かDPに書き直す
-  // TODO: mod を取る
+  // メモ探索
+  // マス目を 1-indexed で取り扱っているので、要素数を n+1 している。
+  vector<bool> done(n+1, false);
+  vector<int> memo(n+1, 0);
+  ll ans = memoize(done, memo, s, n , 1);
   cout << ans << endl;
 
 #ifndef ONLINE_JUDGE
