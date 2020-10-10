@@ -4,7 +4,7 @@ using ll = long long;
 
 const int MOD = 998244353;
 
-// 全探索 (TLE)
+// 全探索
 //
 // s: 区間の和集合
 // n: 最大のマス番号
@@ -28,7 +28,7 @@ ll full_search(set<int> &s, int &n, int current) {
   return cnt;
 }
 
-// メモ探索 (TLE)
+// メモ探索
 //
 // ・入力例1〜4は処理できる。
 // ・提出すると TLE が発生する。
@@ -79,7 +79,7 @@ ll memoize(vector<bool> &done, vector<int> &memo, set<int> &s, int &n, int curre
   return cnt;
 }
 
-// くばるDP (TLE)
+// くばるDP
 ll dp_to_distribute(int &n, set<int> &s) {
   vector<ll> dp(n+1, 0);
   dp.at(1) = 1;
@@ -95,7 +95,7 @@ ll dp_to_distribute(int &n, set<int> &s) {
   return dp.at(n);
 }
 
-// もらうDP (TLE)
+// もらうDP
 ll dp_to_receive(int &n, set<int> &s) {
   vector<ll> dp(n+1);
   dp.at(1) = 1;
@@ -112,7 +112,7 @@ ll dp_to_receive(int &n, set<int> &s) {
   return dp.at(n);
 }
 
-// もらうDP + 累積和 (AC)
+// もらうDP + 累積和
 ll dp_to_receive_with_cumulative_sum(int &n, int &k, vector<int> &l, vector<int> &r) {
   vector<ll> dp(n+1);
   vector<ll> dpsum(n+1);
