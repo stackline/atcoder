@@ -79,8 +79,8 @@ ll memoize(vector<bool> &done, vector<int> &memo, set<int> &s, int &n, int curre
   return cnt;
 }
 
-// DP
-ll do_dp(int &n, set<int> &s) {
+// くばるDP
+ll dp_to_distribute(int &n, set<int> &s) {
   vector<ll> dp(n+1, 0);
   dp.at(1) = 1;
   for (int i = 1; i <= n; ++i) {
@@ -88,6 +88,23 @@ ll do_dp(int &n, set<int> &s) {
       if (i+a <= n) {
         dp.at(i+a) += dp.at(i);
         dp.at(i+a) = dp.at(i+a) % MOD;
+      }
+    }
+  }
+
+  return dp.at(n);
+}
+
+// もらうDP
+ll dp_to_receive(int &n, set<int> &s) {
+  vector<ll> dp(n+1);
+  dp.at(1) = 1;
+  for (int i = 2; i <= n; i++) {
+    for (auto si : s) {
+      int source_cell = i-si;
+      if (source_cell >= 1) {
+        dp.at(i) += dp.at(source_cell);
+        dp.at(i) %= MOD;
       }
     }
   }
@@ -126,8 +143,12 @@ int main() {
   // ll ans = memoize(done, memo, s, n , 1);
   // cout << ans << endl;
 
-  // DP
-  ll ans = do_dp(n, s);
+  // くばるDP
+  // ll ans = dp_to_distribute(n, s);
+  // cout << ans << endl;
+
+  // もらうDP
+  ll ans = dp_to_receive(n, s);
   cout << ans << endl;
 
 #ifndef ONLINE_JUDGE
