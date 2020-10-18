@@ -1,0 +1,4 @@
+---
+Language: Cpp
+# https://clang.llvm.org/docs/ClangFormatStyleOptions.html
+ReflowComments:  false
