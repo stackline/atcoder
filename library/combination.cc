@@ -2,6 +2,7 @@
 using namespace std;
 using ll = long long;
 
+// n 個のものから k 個を選ぶ場合の組み合わせの数 (nCk)
 int combination(int n, int k) {
   int num = 1;
   for (int i = 1; i <= k; i++) {
