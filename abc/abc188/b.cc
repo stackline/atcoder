@@ -2,8 +2,23 @@
 using namespace std;
 using ll = long long;
 
-// cout << fixed << setprecision(15);
-// printf("%.15f\n", sqrt(ans));
+// ### 内積について
+// https://www.studyplus.jp/467
+//
+// ->a = ベクトルa
+// ->b = ベクトルb
+//
+// |->a| = ベクトルaの長さ
+// |->b| = ベクトルbの長さ
+//
+// ->a * ->b = ->aと->bの内積
+//           = |->a| * |->bが->aに作る影の長さ|
+//
+// 内積の性質を利用すると、2つのベクトルの角度 cos0 を求めやすい。
+// 3次元ベクトルも2次元ベクトルと同様の性質を持つ。
+// 3Dゲーム等、3次元空間の計算で利用するらしい。
+//
+//
 int main() {
   cin.tie(nullptr); // Do not flush "cout" when processing "cin".
 
