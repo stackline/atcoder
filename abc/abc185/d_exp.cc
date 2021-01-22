@@ -2,8 +2,20 @@
 using namespace std;
 using ll = long long;
 
-// cout << fixed << setprecision(15);
-// printf("%.15f\n", sqrt(ans));
+// 計算量: sort を利用しているため O(M log2(M))
+//
+// ### 例: N=9, M=4, A={2,4,6,8} の場合
+// 白色のマスが連続している箇所は {1,3,5,7,9} であり、x=5 である。
+//
+// sort(a.begin(), a.end()) の計算回数
+// 4 * log2(4) = 4 * 2 = 8
+//
+// for (int i = 0; i < m; i++) { の計算回数
+// 4
+//
+// for (int i = 0; i < (int)x.size(); i++) { の計算回数
+// 5
+//
 int main() {
   cin.tie(nullptr); // Do not flush "cout" when processing "cin".
 
