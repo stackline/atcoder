@@ -2,6 +2,7 @@
 using namespace std;
 using ll = long long;
 
+// いもす法 + 座標圧縮
 ll imos(ll n, ll prime_c, vector<ll> a, vector<ll> b, vector<ll> c) {
   // vector<ll> table(10e9+1) でシミュレートすると、TLEするため、
   // データ構造は map を使用する。
