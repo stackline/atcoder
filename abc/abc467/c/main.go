@@ -33,6 +33,13 @@ func atoi(s string) int {
 
 func main() {
 	scanner := bufio.NewScanner(os.Stdin)
+
+	// 標準入力から64KBを超える文字列を読み込めるようにする。
+	initSize := 64 * 1024  // 4KB -> 64KB
+	maxSize := 1024 * 1024 // 64KB -> 1MB
+	buf := make([]byte, 0, initSize)
+	scanner.Buffer(buf, maxSize)
+
 	if !scanner.Scan() {
 		err := scanner.Err()
 		panic(err)
